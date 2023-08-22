@@ -1,0 +1,32 @@
+/* Apply styling to the table title */
+.table-title {
+  color: #007bff;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Style the table itself */
+.styled-table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 2px solid #007bff;
+}
+
+/* Style the table header cells */
+.styled-table th {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Style the table data cells */
+.styled-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+/* Add alternating row colors */
+.styled-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
