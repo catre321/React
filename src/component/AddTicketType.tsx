@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { useState } from "react";
 import server from "../Server";
 
 export function AddTicketType() {
@@ -12,7 +12,7 @@ export function AddTicketType() {
     setTicketTypeName(event.target.value);
   };
 
-  const handleTicketTypetatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTicketTypeStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTicketTypeStatus(event.target.value);
   };
 
@@ -26,9 +26,11 @@ export function AddTicketType() {
 
   const handleSubmit = async () => {
     try {
+      const cleanedDuration = duration.replace(/\s/g, '');
       const response = await server.post("/addTicketType", {
         ticketTypeName: ticketTypeName,
         ticketTypeStatus: ticketTypeStatus,
+        duration: cleanedDuration,
         createdBy: createdBy,
       });
 
@@ -53,7 +55,15 @@ export function AddTicketType() {
         <input
           type="text"
           value={ticketTypeStatus}
-          onChange={handleTicketTypetatusChange}
+          onChange={handleTicketTypeStatusChange}
+        />
+      </div>
+      <div>
+        <label>TicketType Duration: (PT12H)</label>
+        <input
+          type="text"
+          value={duration}
+          onChange={handleDurationChange}
         />
       </div>
       <div>

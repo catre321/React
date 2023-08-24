@@ -4,6 +4,9 @@ import * as GetData from "./component/GetData";
 import { AddCustomer } from "./component/AddCustomer";
 import { AddGate } from "./component/AddGate";
 import { Col, Container, Row } from "react-bootstrap";
+import { AddTicketType } from "./component/AddTicketType";
+import { AddReader } from "./component/AddReader";
+import { AddTicketTypeGate } from "./component/AddTicketTypeGate";
 
 function App() {
   return (
@@ -34,6 +37,21 @@ function App() {
             </li>
             <li>
               <button>
+                <Link to="/addTicketType">Add Ticket Type</Link>
+              </button>
+            </li>
+            <li>
+              <button>
+                <Link to="/addReader">Add Reader</Link>
+              </button>
+            </li>
+            <li>
+              <button>
+                <Link to="/addTicketTypeGate">Map Ticket type-Gate</Link>
+              </button>
+            </li>
+            <li>
+              <button>
                 <Link to="/getData/getCardList">Card list</Link>
               </button>
             </li>
@@ -47,6 +65,9 @@ function App() {
           <Route path="/addCard" element={<AddCard />} />
           <Route path="/addCustomer" element={<AddCustomer />} />
           <Route path="/addGate" element={<AddGate />} />
+          <Route path="/addTicketType" element={<AddTicketType />} />
+          <Route path="/addReader" element={<AddReader />} />
+          <Route path="/addTicketTypeGate" element={<AddTicketTypeGate />} />
           <Route path="/getData/getCardList" element={<GetData.CardList />} />
         </Routes>
         </Col>
