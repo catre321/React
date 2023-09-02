@@ -1,5 +1,5 @@
 import { Routes, Route, Link } from "react-router-dom";
-import { AddCard } from "./component/AddCard";
+import { AddCard } from "./component/add_function/AddCard";
 import * as GetData from "./component/GetCard";
 import { AddCustomer } from "./component/AddCustomer";
 import { AddGate } from "./component/AddGate";

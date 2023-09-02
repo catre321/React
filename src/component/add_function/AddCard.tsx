@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import server from "../Server";
+import server from "../../Server";
 
 export function AddCard() {
   const [cardCode, setCardCode] = useState("");
