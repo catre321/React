@@ -4,26 +4,32 @@ import Table from "react-bootstrap/Table";
 import { Card } from "../Interface";
 import { ModifyModal } from "./ModifyModal";
 import server from "../Server";
+import _ from 'lodash' //library of usually use function.
 
 export function CardList() {
   const [cardList, setCardList] = useState<Card[]>([]);
+  const [responseMessage, setResponseMessage] = useState("");
+  
   const [refreshTable, setRefreshTable] = useState(false); // Add this state
 
+  const getCardList = async () => {
+    try {
+      const response = await server.get("/getCardList");
+      setCardList(_.orderBy(response.data as Card[], 'id'));
+    } catch (error) {
+      console.error("Error fetching card list:", error);
+    }
+  }
+
   useEffect(() => {
-    // Fetch card list data
-    server
-      .get("/getCardList")
-      .then((response) => {
-        setCardList(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching card list:", error);
-      });
+    getCardList();
   }, [refreshTable]);
+
 
   const handleSave = async (updatedCard: Card) => {
     try {
       const response = await server.put("/updateCard", {
+        cardId: updatedCard.id,
         cardCode: updatedCard.code,
         cardStatus: updatedCard.status,
         cardNote: updatedCard.note,
@@ -31,7 +37,7 @@ export function CardList() {
       });
 
       // Set the response message from the backend
-      // setResponseMessage(response.data);
+      setResponseMessage(response.data);
       setRefreshTable(!refreshTable);
     } catch (error) {
       // Handle error
@@ -39,8 +45,6 @@ export function CardList() {
       console.error("Error sending data:", error);
     }
   };
-
-  cardList.sort((a, b) => a.id - b.id);
 
   return (
     <>
@@ -77,6 +81,7 @@ export function CardList() {
           ))}
         </tbody>
       </Table>
+      <p>{responseMessage}</p>
     </>
   );
 }

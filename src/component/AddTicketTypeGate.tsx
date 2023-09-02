@@ -8,7 +8,10 @@ export function AddTicketTypeGate(){
   const [gates, setGates] = useState<Gate[]>([]);
   const [selectedTicketType, setSelectedTicketType] = useState<number | undefined>();
   const [selectedGate, setSelectedGate] = useState<number | undefined>();
+  const [ticketTypeName, setTicketTypeName] = useState<string | undefined>();
+  const [gateName, setGateName] = useState<string | undefined>();
   const [maxEntry, setMaxEntry] = useState("");
+  const [status, setStatus] = useState<string | undefined>();
   const [createdBy, setCreatedBy] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
 
@@ -49,34 +52,33 @@ export function AddTicketTypeGate(){
       const selectedGateObj = gates.find(
         (gate) => gate.id === selectedGate
       );
+      setTicketTypeName(selectedTicketTypeObj?.name);
+      setGateName(selectedGateObj?.name);
 
-      if (selectedTicketTypeObj && selectedGateObj) {
-        const response = await server.post("/addTicketTypeGate", {
-          ticketTypeName: selectedTicketTypeObj.name,
-          gateName: selectedGateObj.name,
-          maxEntry: maxEntry,
-          createdBy: createdBy
-        });
-      } 
-      if (!response.data) {
-        // The response is empty
-        setResponseMessage("Error sending data");
+      if (!setTicketTypeName || !setGateName || !status || !maxEntry || !createdBy) {
+        setResponseMessage("Please fill in all fields");
+        return;
       }
-
-
-      // Set the response message from the backend
+  
+      const response = await server.post("/addTicketTypeGate", {
+        ticketTypeName: ticketTypeName,
+        gateName: gateName,
+        maxEntry: maxEntry,
+        status: status,
+        createdBy: createdBy
+      });
       setResponseMessage(response.data);
+
     } catch (error) {
       // Handle error
-      setResponseMessage("Error sending data");
-      console.error("Error sending data:", error);
+      setResponseMessage(`Error: ${error}`);
     }
   };
 
   return (
     <Form>
       <Form.Group controlId="ticketType">
-        <Form.Label>Ticket Type</Form.Label>
+        <Form.Label>Ticket Type:</Form.Label>
         <Form.Control
           as="select"
           value={selectedTicketType}
@@ -94,7 +96,7 @@ export function AddTicketTypeGate(){
       </Form.Group>
 
       <Form.Group controlId="gate">
-        <Form.Label>Gate</Form.Label>
+        <Form.Label>Gate:</Form.Label>
         <Form.Control
           as="select"
           value={selectedGate}
@@ -117,6 +119,20 @@ export function AddTicketTypeGate(){
           onChange={handleMaxEntryChange}
         />
       </div>
+
+      <Form.Group controlId="status">
+        <Form.Label>Status:</Form.Label>
+        <Form.Control
+          as="select"
+          value={status}
+          onChange={(event) => setStatus(event.target.value)}
+        >
+          <option value={undefined}>Select status</option>
+          <option value="available">Available</option>
+          <option value="unavailable">Unavailable</option>
+        </Form.Control>
+      </Form.Group>
+
       <div>
         <label>Created By: </label>
         <input
