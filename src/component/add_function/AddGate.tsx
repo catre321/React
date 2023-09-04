@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import server from "../Server";
+import server from "../../Server";
 
 export function AddGate() {
   const [gateName, setGateName] = useState("");

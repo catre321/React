@@ -1,13 +1,16 @@
 import { Routes, Route, Link } from "react-router-dom";
-import { AddCard } from "./component/add_function/AddCard";
-import * as GetData from "./component/GetCard";
-import { AddCustomer } from "./component/AddCustomer";
-import { AddGate } from "./component/AddGate";
 import { Col, Container, Row, Nav } from "react-bootstrap";
-import { AddTicketType } from "./component/AddTicketType";
-import { AddReader } from "./component/AddReader";
-import { AddTicketTypeGate } from "./component/AddTicketTypeGate";
-import { AddCustomerCardTicketType } from "./component/AddCustomerCardTicketType";
+
+import { AddCard } from "./component/add_function/AddCard";
+import { AddCustomer } from "./component/add_function/AddCustomer";
+import { AddGate } from "./component/add_function/AddGate";
+import { AddTicketType } from "./component/add_function/AddTicketType";
+import { AddReader } from "./component/add_function/AddReader";
+import { AddTicketTypeGate } from "./component/add_function/AddTicketTypeGate";
+import { AddCustomerCardTicketType } from "./component/add_function/AddCustomerCardTicketType";
+
+import { CardList } from "./component/GetCard";
+import { GateList } from "./component/GetGate";
 
 function App() {
   return (
@@ -44,6 +47,9 @@ function App() {
             <Nav.Link>
               <Link to="/getData/getCardList">Card List</Link>
             </Nav.Link>
+            <Nav.Link>
+              <Link to="/getData/getGateList">Gate List</Link>
+            </Nav.Link>
           </Nav>
         </Col>
 
@@ -60,7 +66,8 @@ function App() {
               path="/addCustomerCardTicketType"
               element={<AddCustomerCardTicketType />}
             />
-            <Route path="/getData/getCardList" element={<GetData.CardList />} />
+            <Route path="/getData/getCardList" element={<CardList />} />
+            <Route path="/getData/getGateList" element={<GateList />} />
           </Routes>
         </Col>
       </Row>

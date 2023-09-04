@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import { TicketType } from "../Interface";
-import server from "../Server";
+import { TicketType } from "../../Interface";
+import server from "../../Server";
 
 export function AddCustomerCardTicketType(){
   const [customerName, setCustomerName] = useState<string | undefined>();

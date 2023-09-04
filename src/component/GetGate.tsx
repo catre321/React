@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import Table from "react-bootstrap/Table";
 import { Gate } from "../Interface";
-import { ModifyModal } from "./ModifyModal";
+import { ModifyModal } from "./ModifyModalCard";
 import server from "../Server";
 import _ from 'lodash' //library of usually use function.
 
@@ -30,7 +30,7 @@ export function GateList() {
     try {
       const response = await server.put("/updateGate", {
         gateId: updatedGate.id,
-        gateCode: updatedGate.code,
+        gateCode: updatedGate.name,
         gateStatus: updatedGate.status,
         gateNote: updatedGate.note,
         updatedBy: updatedGate.updatedBy,
@@ -53,9 +53,8 @@ export function GateList() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Code</th>
+            <th>Name</th>
             <th>Status</th>
-            <th>Note</th>
             <th>Created At</th>
             <th>Updated At</th>
             <th>Created By</th>
@@ -69,13 +68,12 @@ export function GateList() {
               <td>{gate.id}</td>
               <td>{gate.name}</td>
               <td>{gate.status}</td>
-              <td>{gate.note}</td>
               <td>{new Date(gate.createdAt).toLocaleString()}</td>
               <td>{new Date(gate.updatedAt).toLocaleString()}</td>
               <td>{gate.createdBy}</td>
               <td>{gate.updatedBy}</td>
               <td>
-                <ModifyModal selectedGate={gate} onSave={handleSave} />
+                {/* <ModifyModal selectedGate={gate} onSave={handleSave} /> */}
               </td>
             </tr>
           ))}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Gate, TicketType } from "../Interface";
-import server from "../Server";
+import { Gate, TicketType } from "../../Interface";
+import server from "../../Server";
 
 export function AddTicketTypeGate(){
   const [ticketTypes, setTicketTypes] = useState<TicketType[]>([]);

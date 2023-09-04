@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import Table from "react-bootstrap/Table";
 import { Card } from "../Interface";
-import { ModifyModal } from "./ModifyModal";
+import { ModifyModal } from "./ModifyModalCard";
 import server from "../Server";
 import _ from 'lodash' //library of usually use function.
 
